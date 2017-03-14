@@ -17,7 +17,7 @@ Prerequirement: ensure you have persistent storage available in OpenShift.  If n
 
 1. Clone repository
  ```bash
-$ git clone https://github.com/jim-minter/kafkanetes.git
+$ git clone https://github.com/JuanyongZhang/kafkanetes.git
 ```
 
 1. (Optionally) import templates into OpenShift (requires elevated privileges)
