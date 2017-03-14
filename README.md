@@ -24,46 +24,46 @@ $ git clone https://github.com/JuanyongZhang/kafkanetes.git
 
    If you follow this step, as an alternative you can use the UI for all subsequent steps.  If you omit this step, in all subsequent steps substitute `$ oc process -f kafkanetes/foo.yaml | oc create -f -` for `$ oc new-app foo`.
 
-   ```bash
+ ```bash
 $ for i in kafkanetes/*.yaml; do sudo oc create -f $i -n openshift; done
 ```
 
 1. Build the Kafkanetes image, containing RHEL, Java, Kafka and its distribution of Zookeeper
-   ```bash
+ ```bash
 $ oc new-app kafkanetes-build
 $ oc logs --follow build/kafkanetes-1
 ```
 
 1. Deploy 3-pod Zookeeper
-   ```bash
+ ```bash
 $ oc new-app kafkanetes-deploy-zk-3
 ```
 
 1. Deploy 2-pod Kafka
-   ```bash
+ ```bash
 $ oc new-app kafkanetes-deploy-kafka-2
 ```
 
 ## Follow the [Apache Kafka Documentation Quick Start](https://kafka.apache.org/documentation.html#quickstart)
 
 1. Deploy a debugging container and connect to it
-   ```bash
+ ```bash
 $ oc new-app kafkanetes-debug
 $ oc rsh $(oc get pods -l deploymentconfig=kafkanetes-debug --template '{{range .items}}{{.metadata.name}}{{end}}')
 ```
 
 1. Create a topic
-   ```bash
+ ```bash
 bash-4.2$ bin/kafka-topics.sh --create --zookeeper kafkanetes-zk:2181 --replication-factor 1 --partitions 1 --topic test
 ```
 
 1. List topics
-   ```bash
+ ```bash
 bash-4.2$ bin/kafka-topics.sh --list --zookeeper kafkanetes-zk:2181
 ```
 
 1. Send some messages
-   ```bash
+ ```bash
 bash-4.2$ bin/kafka-console-producer.sh --broker-list kafkanetes-kafka:9092 --topic test 
 foo
 bar 
@@ -72,7 +72,7 @@ baz
 ```
 
 1. Receive some messages
-   ```bash
+ ```bash
 bash-4.2$ bin/kafka-console-consumer.sh --zookeeper kafkanetes-zk:2181 --topic test --from-beginning
 ```
 
