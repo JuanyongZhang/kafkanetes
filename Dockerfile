@@ -1,4 +1,4 @@
-FROM centos
+FROM openshift/base-centos7
 RUN mkdir -p /opt/kafka \
   && cd /opt/kafka \
   && yum -y install java-1.8.0-openjdk-headless tar \
