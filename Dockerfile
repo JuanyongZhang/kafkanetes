@@ -14,14 +14,15 @@ ENV ZK_HOSTS=localhost:2181 \
 	KM_PORT=9000 \
 	KM_VERSION=1.3.3.4
     
-RUN cd /tmp &&\
+RUN yum -y install java-1.8.0-openjdk-headless tar wget &&\
+	cd /tmp &&\
 	mkdir -p /opt/kafka/manager &&\
 	curl -s http://apache.mesi.com.ar/kafka/0.10.2.0/kafka_2.12-0.10.2.0.tgz | tar -xz --strip-components=1 -C /opt/kafka &&\
 	wget https://raw.githubusercontent.com/JuanyongZhang/kafkanetes/master/dist/kafka-manager-1.3.3.4.zip &&\
 	unzip -d ./ ./kafka-manager-1.3.3.4.zip &&\
 	mv ./kafka-manager-1.3.3.4/* /opt/kafka/manager/ &&\
 	rm -fr ./kafka-manager-1.3.3.4* &&\
-	yum -y install java-1.8.0-openjdk-headless tar
+	yum clean all
 	
 COPY zookeeper-server-start-multiple.sh /opt/kafka/bin/
 COPY start-kafka-manager.sh /opt/kafka/bin/
