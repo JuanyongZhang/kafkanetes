@@ -124,9 +124,9 @@ items:
             - containerPort: 9092
           volumes:
           - name: kafka-logs
-            # emptyDir: {}
-            persistentVolumeClaim:
-              claimName: ${OBJECT_NAME_PREFIX}
+            emptyDir: {}
+            # persistentVolumeClaim:
+              # claimName: ${OBJECT_NAME_PREFIX}
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -231,9 +231,9 @@ items:
             - containerPort: 9092
           volumes:
           - name: kafka-logs
-            # emptyDir: {}
-            persistentVolumeClaim:
-              claimName: ${OBJECT_NAME_PREFIX}-1
+            emptyDir: {}
+            # persistentVolumeClaim:
+              # claimName: ${OBJECT_NAME_PREFIX}-1
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -279,9 +279,9 @@ items:
             - containerPort: 9092
           volumes:
           - name: kafka-logs
-            # emptyDir: {}
-            persistentVolumeClaim:
-              claimName: ${OBJECT_NAME_PREFIX}-2
+            emptyDir: {}
+            # persistentVolumeClaim:
+              # claimName: ${OBJECT_NAME_PREFIX}-2
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -384,9 +384,9 @@ items:
             - containerPort: 2181
           volumes:
           - name: zookeeper
-            # emptyDir: {}
-            persistentVolumeClaim:
-              claimName: ${OBJECT_NAME_PREFIX}
+            emptyDir: {}
+            # persistentVolumeClaim:
+              # claimName: ${OBJECT_NAME_PREFIX}
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -497,9 +497,9 @@ items:
             - containerPort: 3888
           volumes:
           - name: zookeeper
-            # emptyDir: {}
-            persistentVolumeClaim:
-              claimName: ${OBJECT_NAME_PREFIX}-1
+            emptyDir: {}
+            # persistentVolumeClaim:
+              # claimName: ${OBJECT_NAME_PREFIX}-1
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -544,9 +544,9 @@ items:
             - containerPort: 3888
           volumes:
           - name: zookeeper
-            # emptyDir: {}
-            persistentVolumeClaim:
-              claimName: ${OBJECT_NAME_PREFIX}-2
+            emptyDir: {}
+            # persistentVolumeClaim:
+              # claimName: ${OBJECT_NAME_PREFIX}-2
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -591,9 +591,9 @@ items:
             - containerPort: 3888
           volumes:
           - name: zookeeper
-            # emptyDir: {}
-            persistentVolumeClaim:
-              claimName: ${OBJECT_NAME_PREFIX}-3
+            emptyDir: {}
+            # persistentVolumeClaim:
+              # claimName: ${OBJECT_NAME_PREFIX}-3
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -664,3 +664,88 @@ items:
         port: 3888
       selector:
         app: ${OBJECT_NAME_PREFIX}
+        
+- apiVersion: v1
+  kind: Template
+  metadata:
+    name: kafkanetes-deploy-kafka-manager
+    annotations:
+      description: 1-pod kafka-manager
+      tags: messaging,kafka-manager
+  
+  parameters:
+  - name: VOLUME_CAPACITY
+    description: Persistent volume capacity per pod, e.g. 512Mi, 2Gi
+    required: true
+    value: 512Mi
+  - name: OBJECT_NAME_PREFIX
+    description: Name prefix for each object created
+    required: true
+    value: kafkanetes-kafka-manager
+  - name: IMAGESTREAM
+    description: Kafkanetes imagestream name
+    required: true
+    value: kafkanetes
+  
+  objects:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: ${OBJECT_NAME_PREFIX}
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: ${VOLUME_CAPACITY}
+  
+  - apiVersion: v1
+    kind: DeploymentConfig
+    metadata:
+      name: ${OBJECT_NAME_PREFIX}
+    spec:
+      replicas: 1
+      selector:
+        deploymentconfig: ${OBJECT_NAME_PREFIX}
+      template:
+        metadata:
+          labels:
+            deploymentconfig: ${OBJECT_NAME_PREFIX}
+        spec:
+          containers:
+          - name: kafkanetes
+            image: ${IMAGESTREAM}
+            command:
+            - manager/bin/kafka-manager.sh
+            args:
+            - -Dconfig.file=/opt/kafka/manager/conf/application.conf
+            volumeMounts:
+            - mountPath: /tmp/kafka-manager-logs
+              name: kafka-manager-logs
+            ports:
+            - containerPort: 9000
+          volumes:
+          - name: kafka-manager
+            emptyDir: {}
+            # persistentVolumeClaim:
+              # claimName: ${OBJECT_NAME_PREFIX}
+      triggers:
+      - type: ConfigChange
+      - type: ImageChange
+        imageChangeParams:
+          automatic: true
+          containerNames:
+          - kafkanetes
+          from:
+            kind: ImageStream
+            name: ${IMAGESTREAM}
+  
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: ${OBJECT_NAME_PREFIX}
+    spec:
+      ports:
+      - port: 9000
+      selector:
+        deploymentconfig: ${OBJECT_NAME_PREFIX}
