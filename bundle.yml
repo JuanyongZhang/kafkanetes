@@ -88,7 +88,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}
     spec:
       accessModes:
-      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
+      - ReadWriteMany,ReadWriteOnce,ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -181,7 +181,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}-1
     spec:
       accessModes:
-      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
+      - ReadWriteMany,ReadWriteOnce,ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -192,7 +192,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}-2
     spec:
       accessModes:
-      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
+      - ReadWriteMany,ReadWriteOnce,ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -352,7 +352,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}
     spec:
       accessModes:
-      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
+      - ReadWriteMany,ReadWriteOnce,ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -437,7 +437,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}-1
     spec:
       accessModes:
-      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
+      - ReadWriteMany,ReadWriteOnce,ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -448,7 +448,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}-2
     spec:
       accessModes:
-      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
+      - ReadWriteMany,ReadWriteOnce,ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -459,7 +459,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}-3
     spec:
       accessModes:
-      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
+      - ReadWriteMany,ReadWriteOnce,ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
