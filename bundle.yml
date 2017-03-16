@@ -80,17 +80,17 @@ items:
     required: true
     value: kafkanetes
   
-  objects:
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: ${OBJECT_NAME_PREFIX}
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: ${VOLUME_CAPACITY}
+#  objects:
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: ${OBJECT_NAME_PREFIX}
+#    spec:
+#      accessModes:
+#      - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: ${VOLUME_CAPACITY}
   
   - apiVersion: v1
     kind: DeploymentConfig
@@ -173,28 +173,28 @@ items:
     required: true
     value: kafkanetes
   
-  objects:
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: ${OBJECT_NAME_PREFIX}-1
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: ${VOLUME_CAPACITY}
-  
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: ${OBJECT_NAME_PREFIX}-2
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: ${VOLUME_CAPACITY}
+#  objects:
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: ${OBJECT_NAME_PREFIX}-1
+#    spec:
+#      accessModes:
+#      - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: ${VOLUME_CAPACITY}
+#  
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: ${OBJECT_NAME_PREFIX}-2
+#    spec:
+#      accessModes:
+#      - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: ${VOLUME_CAPACITY}
   
   - apiVersion: v1
     kind: DeploymentConfig
@@ -344,17 +344,17 @@ items:
     required: true
     value: kafkanetes
   
-  objects:
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: ${OBJECT_NAME_PREFIX}
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: ${VOLUME_CAPACITY}
+#  objects:
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: ${OBJECT_NAME_PREFIX}
+#    spec:
+#      accessModes:
+#      - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: ${VOLUME_CAPACITY}
   
   - apiVersion: v1
     kind: DeploymentConfig
@@ -429,39 +429,39 @@ items:
     required: true
     value: kafkanetes
   
-  objects:
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: ${OBJECT_NAME_PREFIX}-1
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: ${VOLUME_CAPACITY}
-  
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: ${OBJECT_NAME_PREFIX}-2
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: ${VOLUME_CAPACITY}
-  
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: ${OBJECT_NAME_PREFIX}-3
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: ${VOLUME_CAPACITY}
+#  objects:
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: ${OBJECT_NAME_PREFIX}-1
+#    spec:
+#      accessModes:
+#      - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: ${VOLUME_CAPACITY}
+#  
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: ${OBJECT_NAME_PREFIX}-2
+#    spec:
+#      accessModes:
+#      - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: ${VOLUME_CAPACITY}
+#  
+#  - apiVersion: v1
+#    kind: PersistentVolumeClaim
+#    metadata:
+#      name: ${OBJECT_NAME_PREFIX}-3
+#    spec:
+#      accessModes:
+#      - ReadWriteOnce
+#      resources:
+#        requests:
+#          storage: ${VOLUME_CAPACITY}
   
   - apiVersion: v1
     kind: DeploymentConfig
