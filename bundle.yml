@@ -80,7 +80,7 @@ items:
     required: true
     value: kafkanetes
   
-#  objects:
+  objects:
 #  - apiVersion: v1
 #    kind: PersistentVolumeClaim
 #    metadata:
@@ -173,7 +173,7 @@ items:
     required: true
     value: kafkanetes
   
-#  objects:
+  objects:
 #  - apiVersion: v1
 #    kind: PersistentVolumeClaim
 #    metadata:
@@ -344,7 +344,7 @@ items:
     required: true
     value: kafkanetes
   
-#  objects:
+  objects:
 #  - apiVersion: v1
 #    kind: PersistentVolumeClaim
 #    metadata:
@@ -429,7 +429,7 @@ items:
     required: true
     value: kafkanetes
   
-#  objects:
+  objects:
 #  - apiVersion: v1
 #    kind: PersistentVolumeClaim
 #    metadata:
