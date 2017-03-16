@@ -88,7 +88,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}
     spec:
       accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -124,9 +124,9 @@ items:
             - containerPort: 9092
           volumes:
           - name: kafka-logs
-            emptyDir: {}
-            # persistentVolumeClaim:
-              # claimName: ${OBJECT_NAME_PREFIX}
+            # emptyDir: {}
+            persistentVolumeClaim:
+              claimName: ${OBJECT_NAME_PREFIX}
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -181,7 +181,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}-1
     spec:
       accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -192,7 +192,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}-2
     spec:
       accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -231,9 +231,9 @@ items:
             - containerPort: 9092
           volumes:
           - name: kafka-logs
-            emptyDir: {}
-            # persistentVolumeClaim:
-              # claimName: ${OBJECT_NAME_PREFIX}-1
+            # emptyDir: {}
+            persistentVolumeClaim:
+              claimName: ${OBJECT_NAME_PREFIX}-1
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -279,9 +279,9 @@ items:
             - containerPort: 9092
           volumes:
           - name: kafka-logs
-            emptyDir: {}
-            # persistentVolumeClaim:
-              # claimName: ${OBJECT_NAME_PREFIX}-2
+            # emptyDir: {}
+            persistentVolumeClaim:
+              claimName: ${OBJECT_NAME_PREFIX}-2
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -352,7 +352,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}
     spec:
       accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -384,9 +384,9 @@ items:
             - containerPort: 2181
           volumes:
           - name: zookeeper
-            emptyDir: {}
-            # persistentVolumeClaim:
-              # claimName: ${OBJECT_NAME_PREFIX}
+            # emptyDir: {}
+            persistentVolumeClaim:
+              claimName: ${OBJECT_NAME_PREFIX}
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -437,7 +437,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}-1
     spec:
       accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -448,7 +448,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}-2
     spec:
       accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -459,7 +459,7 @@ items:
       name: ${OBJECT_NAME_PREFIX}-3
     spec:
       accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany, ReadWriteOnce, ReadOnlyMany
       resources:
         requests:
           storage: ${VOLUME_CAPACITY}
@@ -497,9 +497,9 @@ items:
             - containerPort: 3888
           volumes:
           - name: zookeeper
-            emptyDir: {}
-            # persistentVolumeClaim:
-              # claimName: ${OBJECT_NAME_PREFIX}-1
+            # emptyDir: {}
+            persistentVolumeClaim:
+              claimName: ${OBJECT_NAME_PREFIX}-1
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -544,9 +544,9 @@ items:
             - containerPort: 3888
           volumes:
           - name: zookeeper
-            emptyDir: {}
-            # persistentVolumeClaim:
-              # claimName: ${OBJECT_NAME_PREFIX}-2
+            # emptyDir: {}
+            persistentVolumeClaim:
+              claimName: ${OBJECT_NAME_PREFIX}-2
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -591,9 +591,9 @@ items:
             - containerPort: 3888
           volumes:
           - name: zookeeper
-            emptyDir: {}
-            # persistentVolumeClaim:
-              # claimName: ${OBJECT_NAME_PREFIX}-3
+            # emptyDir: {}
+            persistentVolumeClaim:
+              claimName: ${OBJECT_NAME_PREFIX}-3
       triggers:
       - type: ConfigChange
       - type: ImageChange
@@ -674,10 +674,6 @@ items:
       tags: messaging,kafka-manager
   
   parameters:
-  - name: VOLUME_CAPACITY
-    description: Persistent volume capacity per pod, e.g. 512Mi, 2Gi
-    required: true
-    value: 512Mi
   - name: OBJECT_NAME_PREFIX
     description: Name prefix for each object created
     required: true
@@ -686,19 +682,7 @@ items:
     description: Kafkanetes imagestream name
     required: true
     value: kafkanetes
-  
-  objects:
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: ${OBJECT_NAME_PREFIX}
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: ${VOLUME_CAPACITY}
-  
+    
   - apiVersion: v1
     kind: DeploymentConfig
     metadata:
@@ -727,8 +711,6 @@ items:
           volumes:
           - name: kafka-manager
             emptyDir: {}
-            # persistentVolumeClaim:
-              # claimName: ${OBJECT_NAME_PREFIX}
       triggers:
       - type: ConfigChange
       - type: ImageChange
