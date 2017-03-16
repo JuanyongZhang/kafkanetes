@@ -683,6 +683,7 @@ items:
     required: true
     value: kafkanetes
     
+  objects:
   - apiVersion: v1
     kind: DeploymentConfig
     metadata:
