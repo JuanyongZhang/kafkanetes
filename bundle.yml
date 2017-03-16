@@ -709,7 +709,7 @@ items:
             ports:
             - containerPort: 9000
           volumes:
-          - name: kafka-manager
+          - name: kafka-manager-logs
             emptyDir: {}
       triggers:
       - type: ConfigChange
