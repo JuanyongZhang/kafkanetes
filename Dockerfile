@@ -12,16 +12,17 @@ ENV ZK_HOSTS=localhost:2181 \
     KAFKA_DELETE_RETENTION_MS=1000 \
 	SCALA_VERSION=2.12 \
 	KM_PORT=9000 \
-	KM_VERSION=1.3.3.4
+	KM_VERSION=1.3.3.4 \
+	JAVA_VERSION=1.8.0
     
-RUN yum -y install java-1.8.0-openjdk-headless tar wget &&\
+RUN yum -y install java-${JAVA_VERSION}-openjdk-headless tar wget unzip &&\
 	cd /tmp &&\
 	mkdir -p /opt/kafka/manager &&\
-	curl -s http://apache.mesi.com.ar/kafka/0.10.2.0/kafka_2.12-0.10.2.0.tgz | tar -xz --strip-components=1 -C /opt/kafka &&\
-	wget https://raw.githubusercontent.com/JuanyongZhang/kafkanetes/master/dist/kafka-manager-1.3.3.4.zip &&\
-	unzip -d ./ ./kafka-manager-1.3.3.4.zip &&\
-	mv ./kafka-manager-1.3.3.4/* /opt/kafka/manager/ &&\
-	rm -fr ./kafka-manager-1.3.3.4* &&\
+	curl -s http://apache.mesi.com.ar/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz | tar -xz --strip-components=1 -C /opt/kafka &&\
+	wget https://raw.githubusercontent.com/JuanyongZhang/kafkanetes/master/dist/kafka-manager-${KM_VERSION}.zip &&\
+	unzip -d ./ ./kafka-manager-${KM_VERSION}.zip &&\
+	mv ./kafka-manager-${KM_VERSION}/* /opt/kafka/manager/ &&\
+	rm -fr ./kafka-manager-${KM_VERSION}* &&\
 	yum clean all
 	
 COPY zookeeper-server-start-multiple.sh /opt/kafka/bin/
